@@ -9,92 +9,31 @@ const NewsFeed =  () => {
   useEffect(  () => {
 
     const fetchData = async () => {
-
-      // const options = {
-      //     method: 'GET',
-      //     url: 'https://crypto-news-live1.p.rapidapi.com/news',
-      //     headers: {
-      //       'X-RapidAPI-Key': 'e1970e8671mshf80db53f3903a8fp109e08jsna0ed37a6107d',
-      //       'X-RapidAPI-Host': 'crypto-news-live1.p.rapidapi.com'
-      //     }
-      //   }
-
-        // const options = {
-        //   method: 'GET',
-        //   // url: 'https://cryptocurrency-news2.p.rapidapi.com/v1/bsc',
-        //   // url: 'https://crypto-news-live1.p.rapidapi.com/news',
-        //   // url: 'https://newest-crypto-information-live.p.rapidapi.com/crypto/bitcoin/coindesk',
-
-        //   url: 'https://crypto-news-live11.p.rapidapi.com/all',
-        //   params: {
-        //     page: '1',
-        //     per_page: '5'
-        //   },
-
-        //   headers: {
-        //     'X-RapidAPI-Key': 'e1970e8671mshf80db53f3903a8fp109e08jsna0ed37a6107d',
-        //     'X-RapidAPI-Host': 'cryptocurrency-news2.p.rapidapi.com'
-        //   }
-        // };
-        // const axios = require('axios');
-
-        /*
-        //Rapid API calls exhauseted 
-        const options = {
-          method: 'GET',
-          url: 'https://crypto-news-live11.p.rapidapi.com/all',
-          params: {
-            page: '1',
-            per_page: '5'
-          },
-          headers: {
-            'X-RapidAPI-Key': 'e1970e8671mshf80db53f3903a8fp109e08jsna0ed37a6107d',
-            'X-RapidAPI-Host': 'crypto-news-live11.p.rapidapi.com'
-          }
-        };
-
-        try {
-          const response = await axios.request(options);
-          console.log("---------------------------------------")
-          // console.log(response.data.data)
-          setArticles(response.data.data);
-          console.log("---------------------------------------")
-        } catch (error) {
-          console.error(error);
-        }
-
-        */
         
-       // var url = 'https://newsapi.org/v2/top-headlines?' +
-       //   'country=us&' +
-       //   'apiKey=18f7db55943a4265883f97bfbaf03c4a';
-       // let API_KEY = "18f7db55943a4265883f97bfbaf03c4a";
-       
-      //  let data;
-        var url = "https://newsapi.org/v2/top-headlines?" +
-          "country=us&" +
-          "apiKey=" + process.env.REACT_APP_NEWS_API_KEY;
+        /*
+          var url = "https://newsapi.org/v2/top-headlines?" +
+            "country=us&" +
+            "apiKey=" + process.env.REACT_APP_NEWS_API_KEY;
+        */
+        var url = "http://localhost:8000/news";
 
-          console.log(`url: ${url}`)
+        console.log(`url: [${url}]`)
 
         var req = new Request(url);
         fetch(req)
             .then(function(response) {
-              // console.count(`---------------------------`);
-              console.count(response.json().then( e => setArticles(e.articles) ));
-              // console.count(`---------------------------`);
+              console.count(`---------------------------`);
+              response.json().then( e => {
+                setArticles( e.articles );
+                // console.log( e.articles[0] );
+                });
+              console.count(`---------------------------`);
                 // setArticles(e.articles);
                 // data = response.json().data
             })
-            
-            // console.log(`---------------------------`);
-            // console.log(`data: ${articles}`);
-            // console.log(`---------------------------`);
-        
       } 
 
     fetchData();
-
     },[])
 
     
